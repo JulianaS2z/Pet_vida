@@ -2,6 +2,7 @@
 
 CREATE VIEW vw_consultas_completas AS 
 SELECT 
+    c.id_consultas,
     c.data_hora, 
     c.status AS status_consulta,
     c.diagnostico,
@@ -20,7 +21,7 @@ INNER JOIN tutores t ON a.tutores_id_tutores = t.id_tutores
 INNER JOIN veterinarios v ON c.veterinarios_id_veterinarios = v.id_veterinarios 
 LEFT JOIN pagamentos p ON c.id_consultas = p.consultas_id_consultas;
 
-2
+-- 2
 
 CREATE VIEW vw_agenda_hoje AS
 SELECT *
@@ -28,7 +29,7 @@ FROM vw_consultas_completas
 WHERE DATE(data_hora) = CURDATE()
 ORDER BY data_hora;
 
-3
+-- 3
 
 CREATE VIEW vw_faturamento_mensal AS
 SELECT 
@@ -45,7 +46,7 @@ GROUP BY
     v.id_veterinarios,
     v.nome;
 
-4
+-- 4
 
 create view vw_animais_detalhados 
 as select 
@@ -64,7 +65,7 @@ GROUP BY
 	t.nome,
 	e.nome;
 
-5
+-- 5
 
 
 CREATE VIEW vw_inadimplentes AS 

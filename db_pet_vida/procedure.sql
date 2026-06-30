@@ -1,4 +1,4 @@
-1
+-- 1
 
 DELIMITER $$
 CREATE PROCEDURE sp_agendar_consulta(
@@ -45,7 +45,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-2
+-- 2
 
 DELIMITER $$
 CREATE PROCEDURE sp_concluir_consulta(
@@ -68,7 +68,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-3
+-- 3
 
 DELIMITER $$
 CREATE PROCEDURE sp_concluir_consulta(
@@ -91,7 +91,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-4
+-- 4
 
 DELIMITER $$
 CREATE PROCEDURE sp_cancelar_consulta(
@@ -121,7 +121,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-5
+-- 5
 
 DELIMITER $$
 CREATE PROCEDURE sp_cadastrar_animal(
@@ -152,5 +152,35 @@ BEGIN
     SET v_novo_id = LAST_INSERT_ID();
     
     SELECT 'Animal cadastrado com sucesso!' AS Resultado, v_novo_id AS ID_Novo_Animal;
+END $$
+DELIMITER ;
+
+-- 6
+
+DELIMITER $$
+CREATE PROCEDURE sp_registrar_pagamento(
+    IN p_consulta_id INT UNSIGNED,
+    IN p_valor_pago DECIMAL(10,2),
+    IN p_forma_pagamento VARCHAR(20)
+)
+BEGIN
+    DECLARE v_consulta_existe INT;
+    DECLARE v_pagamento_existe INT;
+
+    SELECT COUNT(*) INTO v_consulta_existe FROM consultas WHERE id_consultas = p_consulta_id;
+    IF v_consulta_existe = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: Consulta não encontrada.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_pagamento_existe FROM pagamentos WHERE consultas_id_consultas = p_consulta_id;
+    IF v_pagamento_existe = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Erro: Pagamento não encontrado para esta consulta.';
+    END IF;
+
+    UPDATE pagamentos
+    SET valor_pago = p_valor_pago, forma_pagamento = p_forma_pagamento, status = 'pago', data_pagamento = NOW()
+    WHERE consultas_id_consultas = p_consulta_id;
+    
+    SELECT 'Pagamento registrado com sucesso!' AS Resultado;
 END $$
 DELIMITER ;
