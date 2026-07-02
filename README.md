@@ -1,5 +1,8 @@
 ﻿# Pet Vida API
 
+Aplicação de gerenciamento de clínica veterinária desenvolvida em Node.js com MySQL.
+![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
+
 ## Descrição do Projeto
 
 A **Pet Vida API** é uma solução RESTful criada para gerenciar uma clínica veterinária completa, com recursos para tutores, animais, consulta médica, pagamentos e relatórios financeiros. O backend é implementado em **Node.js** utilizando o framework **Express**, enquanto o armazenamento de dados é realizado em **MySQL**.
