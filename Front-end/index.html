@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Vida</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Clinica veterinaria</p>
+      <h1>Pet Vida</h1>
+    </div>
+    <form class="api-config" id="apiConfigForm">
+      <label for="apiBaseUrl">API</label>
+      <div class="inline-control">
+        <input id="apiBaseUrl" name="apiBaseUrl" type="url" value="http://localhost:3000/api" required>
+        <button type="submit">Aplicar</button>
+      </div>
+    </form>
+  </header>
+
+  <main class="page-shell">
+    <section class="status-panel" id="statusPanel" aria-live="polite">
+      <span id="statusText">Pronto para conectar com a API.</span>
+      <button id="reloadButton" type="button">Atualizar listas</button>
+    </section>
+
+    <section class="grid two-columns">
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GET /api/tutores</p>
+            <h2>Tutores</h2>
+          </div>
+          <span class="counter" id="tutoresCount">0</span>
+        </div>
+        <div class="list" id="tutoresList">
+          <p class="empty-state">Nenhum tutor carregado.</p>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GET /api/animais</p>
+            <h2>Animais</h2>
+          </div>
+          <span class="counter" id="animaisCount">0</span>
+        </div>
+        <div class="list" id="animaisList">
+          <p class="empty-state">Nenhum animal carregado.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid three-columns">
+      <form class="panel form-panel" id="tutorForm">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">POST /api/tutores</p>
+            <h2>Novo tutor</h2>
+          </div>
+        </div>
+        <label>
+          Nome
+          <input name="nome" type="text" placeholder="Maria Silva" required>
+        </label>
+        <label>
+          CPF
+          <input name="cpf" type="text" placeholder="000.000.000-00" required>
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" placeholder="maria@email.com">
+        </label>
+        <label>
+          Telefone
+          <input name="telefone" type="tel" placeholder="(11) 99999-9999">
+        </label>
+        <button type="submit">Cadastrar tutor</button>
+      </form>
+
+      <form class="panel form-panel" id="animalForm">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">POST /api/animais</p>
+            <h2>Novo animal</h2>
+          </div>
+        </div>
+        <label>
+          Nome
+          <input name="nome" type="text" placeholder="Luna" required>
+        </label>
+        <label>
+          ID da especie
+          <input name="especie_id" type="number" min="1" placeholder="1" required>
+        </label>
+        <label>
+          Raca
+          <input name="raca" type="text" placeholder="SRD">
+        </label>
+        <label>
+          Data de nascimento
+          <input name="data_nascimento" type="date">
+        </label>
+        <label>
+          ID do tutor
+          <input name="tutor_id" type="number" min="1" placeholder="1" required>
+        </label>
+        <button type="submit">Cadastrar animal</button>
+      </form>
+
+      <form class="panel form-panel" id="consultaForm">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">POST /api/consultas</p>
+            <h2>Agendar consulta</h2>
+          </div>
+        </div>
+        <label>
+          ID do animal
+          <input name="animal_id" type="number" min="1" placeholder="1" required>
+        </label>
+        <label>
+          ID do veterinario
+          <input name="veterinario_id" type="number" min="1" placeholder="1" required>
+        </label>
+        <label>
+          Data e hora
+          <input name="data_hora" type="datetime-local" required>
+        </label>
+        <label>
+          Valor
+          <input name="valor" type="number" min="0" step="0.01" placeholder="150.00" required>
+        </label>
+        <button type="submit">Agendar</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,142 +1,109 @@
-# Clínica Pet Vida
+﻿# Pet Vida API
 
-Aplicação de gerenciamento de clínica veterinária desenvolvida em Node.js com MySQL.
+![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
 
-## Estrutura do banco
+## Descrição do Projeto
 
-- Tutores
-- Animais
-- Espécies
-- Veterinários
-- Consultas
-- Pagamentos
+A **Pet Vida API** é uma API RESTful desenvolvida para gerenciar uma clínica veterinária completa, oferecendo controle de tutores, animais, consultas, pagamentos e relatórios. A aplicação foi construída com **Node.js** e **Express**, utilizando **MySQL** como banco de dados relacional.
 
-## Funcionalidades
+O projeto foi projetado para facilitar integrações com frontends e aplicativos móveis, permitindo operações de CRUD consistentes e desempenho confiável. Ele também conta com a **Licença MIT** e inclui um `.gitignore` para proteção de arquivos sensíveis como `node_modules` e o arquivo `.env`.
 
-- Cadastro de tutores
-- Cadastro de animais
-- Controle de consultas
-- Controle financeiro
-- Relacionamentos com Foreign Keys
-- Normalização utilizando tabela de espécies
+## Modelagem do Banco de Dados
 
-## Tecnologias
+Abaixo está a referência para o Diagrama de Entidade-Relacionamento (DER):
 
-- Node.js
-- Express
-- MySQL
-- MySQL Workbench
-- Git
-- GitHub
+![DER do banco de dados](docs/der.png)
 
-## Como executar
+## Tecnologias Utilizadas
 
-### Configuração do Banco de Dados
+- **Node.js**
+- **Express**
+- **MySQL**
 
-1. Execute o arquivo `db_pet_vida/schema.sql` para criar a estrutura
-2. Execute o arquivo `db_pet_vida/view.sql` para criar as views
-3. Execute o arquivo `db_pet_vida/procedure.sql` para criar as stored procedures
-4. Execute o arquivo `db_pet_vida/seed.sql` para popular dados de exemplo
+## Instruções de Instalação e Execução
 
-### Configuração da Aplicação
-
-1. Instale as dependências:
 ```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/pet-vida.git
+cd pet-vida
+
+# 2. Instale as dependências
 npm install
-```
 
-2. Crie um arquivo `.env` baseado em `.env.example`:
-```bash
-cp .env.example .env
-```
+# 3. Crie o arquivo de variáveis de ambiente
+copy .env.example .env
 
-3. Configure as variáveis de ambiente no arquivo `.env`
+# 4. Configure as variáveis no .env
+# Exemplo:
+# DB_HOST=localhost
+# DB_USER=root
+# DB_PASSWORD=senha
+# DB_NAME=pet_vida
+# PORT=3000
 
-4. Inicie o servidor:
-```bash
+# 5. Inicie a aplicação
 npm start
 ```
 
-O servidor iniciará na porta 3000 (ou a porta definida na variável `PORT`)
+> O `.gitignore` protege arquivos sensíveis como `node_modules` e o `.env`, evitando que essas informações sejam adicionadas ao repositório.
 
-## API Endpoints
+## Tabela de Endpoints da API
 
-### Veterinários
-- `GET /api/veterinarios` — lista todos os veterinários
-- `GET /api/veterinarios/:id` — obtém um veterinário específico
+| Método | Endpoint | Descrição | Status Code de Sucesso |
+| --- | --- | --- | --- |
+| GET | `/api/tutores` | Lista todos os tutores | `200` |
+| POST | `/api/tutores` | Cria um novo tutor | `201` |
+| PUT | `/api/tutores/:id` | Atualiza um tutor existente | `200` |
+| DELETE | `/api/tutores/:id` | Remove um tutor | `204` |
+| GET | `/api/animais` | Lista todos os animais | `200` |
+| POST | `/api/animais` | Cadastra um novo animal | `201` |
+| GET | `/api/consultas` | Lista todas as consultas | `200` |
+| POST | `/api/consultas` | Agenda uma nova consulta | `201` |
 
-### Animais
-- `GET /api/animais` — lista todos os animais com detalhes
-- `GET /api/animais/:id` — obtém um animal específico
-
-### Espécies
-- `GET /api/especies` — lista todas as espécies
-- `GET /api/especies/:id` — obtém uma espécie específica
-
-### Tutores
-- `GET /api/tutores` — lista todos os tutores
-- `GET /api/tutores/:id` — obtém um tutor específico
-
-### Consultas
-- `GET /api/consultas/agenda/:data` — lista consultas de uma data específica (formato: YYYY-MM-DD)
-- `GET /api/consultas/:id` — obtém uma consulta específica
-- `POST /api/consultas` — agenda uma nova consulta
-  - Body: `{ animal_id, veterinario_id, data_hora, valor }`
-- `PUT /api/consultas/:id/concluir` — conclui uma consulta
-  - Body: `{ diagnostico }`
-
-### Pagamentos
-- `GET /api/pagamentos/:id` — obtém um pagamento específico
-- `POST /api/pagamentos/:consulta_id` — registra um pagamento
-  - Body: `{ valor_pago, forma_pagamento }` (forma_pagamento: pix, cartao, dinheiro, convênio)
-
-### Relatórios
-- `GET /api/relatorios/dashboard` — dashboard financeiro com resumo de consultas e faturamento
-- `GET /api/relatorios/inadimplentes` — lista de clientes inadimplentes
-
-## Estrutura do Projeto
+## Estrutura de Pastas
 
 ```
 Pet_vida/
+├── LICENSE
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── server.js
+├── README.md
+├── .env
+├── backups/
+│   └── petvida_2026-06-16.sql
+├── database/
+│   ├── backup.sh
+│   ├── reports.sql
+│   └── security.sql
+├── docs/
+│   └── der.png
 ├── db_pet_vida/
-│   ├── schema.sql          # Estrutura do banco de dados
-│   ├── view.sql            # Views do banco de dados
-│   ├── procedure.sql       # Stored procedures
-│   ├── seed.sql            # Dados de exemplo
-│   ├── triggers.sql        # Triggers do banco de dados
-│   └── functions.sql       # Funções do banco de dados
-├── src/
-│   ├── config/
-│   │   └── database.js     # Configuração da conexão MySQL
-│   └── routes/
-│       ├── app.js          # Configuração principal das rotas
-│       ├── veterinarios.js # Rotas de veterinários
-│       ├── animais.js      # Rotas de animais
-│       ├── consultas.js    # Rotas de consultas
-│       ├── especies.js     # Rotas de espécies
-│       ├── tutores.js      # Rotas de tutores
-│       ├── pagamentos.js   # Rotas de pagamentos
-│       └── relatorios.js   # Rotas de relatórios
-├── server.js               # Arquivo principal do servidor
-├── package.json            # Dependências do projeto
-├── .env.example            # Exemplo de variáveis de ambiente
-└── README.md               # Este arquivo
+│   ├── schema.sql
+│   ├── seed.sql
+│   ├── procedure.sql
+│   ├── triggers.sql
+│   ├── view.sql
+│   ├── functions.sql
+│   └── prints/
+│       └── ...
+└── src/
+    ├── app.js
+    ├── config/
+    │   └── database.js
+    └── routes/
+        ├── app.js
+        ├── animais.js
+        ├── consultas.js
+        ├── especies.js
+        ├── pagamentos.js
+        ├── relatorios.js
+        ├── tutores.js
+        └── veterinarios.js
 ```
 
-## Respostas da API
+## Contato
 
-Todas as respostas seguem o padrão:
-
-```json
-{
-  "success": true/false,
-  "data": {},
-  "message": "Mensagem descritiva"
-}
-```
-
-## Tratamento de Erros
-
-- `400` — Requisição inválida (parâmetros faltando)
-- `404` — Recurso não encontrado
-- `500` — Erro interno do servidor
+- **Insira Seu Nome Aqui**
+- LinkedIn: [Insira Seu Link do LinkedIn Aqui](Insira Seu Link do LinkedIn Aqui)
