@@ -105,5 +105,5 @@ Pet_vida/
 
 ## Contato
 
-- **Insira Seu Nome Aqui**
-- LinkedIn: [Insira Seu Link do LinkedIn Aqui](Insira Seu Link do LinkedIn Aqui)
+- Juliana Evangelista Simão dos Santos
+- LinkedIn: [https://www.linkedin.com/in/juliana-santos-52bb49275]
