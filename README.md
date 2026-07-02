@@ -1,18 +1,10 @@
 ﻿# Pet Vida API
 
-![MySQL](https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white) ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-
 ## Descrição do Projeto
 
-A **Pet Vida API** é uma API RESTful desenvolvida para gerenciar uma clínica veterinária completa, oferecendo controle de tutores, animais, consultas, pagamentos e relatórios. A aplicação foi construída com **Node.js** e **Express**, utilizando **MySQL** como banco de dados relacional.
+A **Pet Vida API** é uma solução RESTful criada para gerenciar uma clínica veterinária completa, com recursos para tutores, animais, consulta médica, pagamentos e relatórios financeiros. O backend é implementado em **Node.js** utilizando o framework **Express**, enquanto o armazenamento de dados é realizado em **MySQL**.
 
-O projeto foi projetado para facilitar integrações com frontends e aplicativos móveis, permitindo operações de CRUD consistentes e desempenho confiável. Ele também conta com a **Licença MIT** e inclui um `.gitignore` para proteção de arquivos sensíveis como `node_modules` e o arquivo `.env`.
-
-## Modelagem do Banco de Dados
-
-Abaixo está a referência para o Diagrama de Entidade-Relacionamento (DER):
-
-![DER do banco de dados](docs/der.png)
+Esta API suporta operações padrão de CRUD para as principais entidades do sistema e foi projetada para ser escalável e fácil de integrar com frontends ou aplicativos móveis. O projeto também utiliza a **Licença MIT**, garantindo que o código seja livre para uso e contribuição, e conta com um arquivo `.gitignore` para proteger informações sensíveis como `node_modules` e o arquivo `.env`.
 
 ## Tecnologias Utilizadas
 
@@ -45,7 +37,7 @@ copy .env.example .env
 npm start
 ```
 
-> O `.gitignore` protege arquivos sensíveis como `node_modules` e o `.env`, evitando que essas informações sejam adicionadas ao repositório.
+> O `.gitignore` protege arquivos sensíveis como `node_modules` e o `.env`, mantendo o repositório seguro.
 
 ## Tabela de Endpoints da API
 
@@ -53,11 +45,11 @@ npm start
 | --- | --- | --- | --- |
 | GET | `/api/tutores` | Lista todos os tutores | `200` |
 | POST | `/api/tutores` | Cria um novo tutor | `201` |
-| PUT | `/api/tutores/:id` | Atualiza um tutor existente | `200` |
+| PUT | `/api/tutores/:id` | Atualiza os dados de um tutor | `200` |
 | DELETE | `/api/tutores/:id` | Remove um tutor | `204` |
 | GET | `/api/animais` | Lista todos os animais | `200` |
 | POST | `/api/animais` | Cadastra um novo animal | `201` |
-| GET | `/api/consultas` | Lista todas as consultas | `200` |
+| GET | `/api/consultas` | Lista consultas agendadas | `200` |
 | POST | `/api/consultas` | Agenda uma nova consulta | `201` |
 
 ## Estrutura de Pastas
@@ -74,22 +66,38 @@ Pet_vida/
 ├── backups/
 │   └── petvida_2026-06-16.sql
 ├── database/
-│   ├── backup.sh
-│   ├── reports.sql
-│   └── security.sql
-├── docs/
-│   └── der.png
+│   └── backup.sh
 ├── db_pet_vida/
 │   ├── schema.sql
 │   ├── seed.sql
 │   ├── procedure.sql
 │   ├── triggers.sql
 │   ├── view.sql
-│   ├── functions.sql
-│   └── prints/
-│       └── ...
+│   └── functions.sql
+├── docs/
+│   └── README.md
 └── src/
-    ├── app.js
+
+
+## Front-end
+
+A interface do usuário está na pasta `Front-end/`.
+
+- Para testar localmente, abra o arquivo `Front-end/index.html` diretamente no navegador.
+- Para servir como um site estático (recomendado), use um servidor simples. Exemplos:
+
+```bash
+# com http-server
+npx http-server Front-end -p 8080
+
+# ou com serve
+npx serve Front-end
+```
+
+Depois, acesse `http://localhost:8080` (ou a porta escolhida).
+
+Observação: o front-end consome a API em `http://localhost:3000` por padrão. Se a API estiver rodando em outra porta ou host, atualize a URL em `Front-end/script.js`.
+
     ├── config/
     │   └── database.js
     └── routes/
@@ -102,6 +110,10 @@ Pet_vida/
         ├── tutores.js
         └── veterinarios.js
 ```
+
+## Licença
+
+Este projeto está licenciado sob a **Licença MIT**. 
 
 ## Contato
 
